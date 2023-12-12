@@ -1,3 +1,10 @@
+.main-bg {
+  height: 400px;
+  background-image: url(./img/shoes1.jpg);
+  background-position: center;
+  margin-bottom: 20px;
+}
+
 .App {
   text-align: center;
 }
