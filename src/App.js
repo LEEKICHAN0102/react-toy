@@ -1,11 +1,15 @@
 import './App.css';
 import {Navbar,Container,Nav} from 'react-bootstrap';
+import { useState } from 'react';
 import { Route,Routes, useNavigate, Outlet } from 'react-router-dom';
+import data from './db/data';
 import Detail from './routes/detail';
 import Product from './components/product';
 
 function App() {
+  const [shoes] = useState(data);
   const navigate = useNavigate();
+  const [isSort , setSort] = useState(false);
 
   return (
     <div className="App">
@@ -20,11 +24,13 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div className="main-bg"></div>
+      <div className="main-bg">
+        <button onClick={()=>{setSort(true)}}>정렬하기~</button>
+      </div>
       <Container>
         <Routes>
-          <Route path='/' element={< Product/>}/>
-          <Route path='/detail' element={<Detail />}/>
+          <Route path='/' element={< Product shoes={shoes} isSort={isSort} />}/>
+          <Route path='/detail/:id' element={<Detail shoes={shoes} />}/>
           <Route path='*' element={<div>404</div>}/>
           <Route path='/about' element={<About/>}>
             <Route path='member' element={<div>Member</div>}/>
