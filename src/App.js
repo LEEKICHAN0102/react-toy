@@ -9,7 +9,6 @@ import Product from './components/product';
 function App() {
   const [shoes] = useState(data);
   const navigate = useNavigate();
-  const [isSort , setSort] = useState(false);
 
   return (
     <div className="App">
@@ -24,12 +23,10 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div className="main-bg">
-        <button onClick={()=>{setSort(true)}}>정렬하기~</button>
-      </div>
+      <div className="main-bg"></div>
       <Container>
         <Routes>
-          <Route path='/' element={< Product shoes={shoes} isSort={isSort} />}/>
+          <Route path='/' element={< Product shoes={shoes} />}/>
           <Route path='/detail/:id' element={<Detail shoes={shoes} />}/>
           <Route path='*' element={<div>404</div>}/>
           <Route path='/about' element={<About/>}>

@@ -1,13 +1,13 @@
 import {Row,Col} from "react-bootstrap";
+import axios from "axios";
+import { useState } from "react";
 
 export default function Product(props) {
-  const shoesSort = props.isSort
-  ? [...props.shoes].sort((a,b) => a.title.localeCompare(b.title))
-  : props.shoes;
+  const [newShoes, setNewShoes] = useState(props.shoes);
 
   return (
     <Row>
-      {shoesSort.map((e,i) => 
+      {newShoes.map((e,i) => 
         <Col sm>
           <img src={`https://codingapple1.github.io/shop/shoes${i+1}.jpg`} width="80%" alt='shoes'/>
           <h4>{e.title}</h4>
@@ -15,6 +15,16 @@ export default function Product(props) {
           <p>{e.price}</p>
         </Col>
       )}
+      <button onClick={()=>{
+        axios.get("https://codingapple1.github.io/shop/data2.json")
+        .then((response)=>{
+          const newData = response.data;
+          setNewShoes((prevShoes) => [...prevShoes, ...newData]);
+        })
+        .catch(()=>{
+          console.log("error ㅋㅋ")
+        })
+      }}>더 보기</button>
     </Row>
   )
 }
