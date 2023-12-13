@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export default function Product(props) {
   const [newShoes, setNewShoes] = useState(props.shoes);
+  const [clickCount , setClickCount] = useState(2);
 
   return (
     <Row>
@@ -15,16 +16,19 @@ export default function Product(props) {
           <p>{e.price}</p>
         </Col>
       )}
-      <button onClick={()=>{
-        axios.get("https://codingapple1.github.io/shop/data2.json")
+      { clickCount !== 4 ? <button onClick={()=>{
+        axios.get(`https://codingapple1.github.io/shop/data${clickCount}.json`)
         .then((response)=>{
           const newData = response.data;
           setNewShoes((prevShoes) => [...prevShoes, ...newData]);
         })
         .catch(()=>{
-          console.log("error ㅋㅋ")
-        })
+          console.log("error ㅋㅋ");
+        });
+        setClickCount(clickCount+1);
       }}>더 보기</button>
+      : null
+    }
     </Row>
   )
 }
