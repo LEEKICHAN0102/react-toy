@@ -9,7 +9,7 @@ export default function Product() {
     <Row>
       {shoes.map((e,i) => 
         <Col sm>
-          <img src={`https://codingapple1.github.io/shop/shoes${i+1}.jpg`} width="80%" alt='shoes2'/>
+          <img src={`https://codingapple1.github.io/shop/shoes${i+1}.jpg`} width="80%" alt='shoes'/>
           <h4>{e.title}</h4>
           <p>{e.content}</p>
           <p>{e.price}</p>
