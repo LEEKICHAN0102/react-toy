@@ -1,3 +1,4 @@
+import { Nav } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useState , useEffect } from "react";
@@ -8,6 +9,7 @@ export default function Detail(props) {
   const [isGone, setIsGone] = useState(true);
   const [isNumber, setIsNumber] = useState(false);
   const [inputVal , setInputVal] = useState("");
+  const [tab, setTab] = useState(0);
 
   useEffect(()=>{
     const timer = setTimeout(()=> {setIsGone(false)}, 2000);
@@ -38,9 +40,26 @@ export default function Detail(props) {
           <button className="btn btn-danger">주문하기</button> 
         </div>
       </div>
+      <Nav variant="tabs"  defaultActiveKey="link0">
+        <Nav.Item>
+          <Nav.Link eventKey="link0" onClick={()=>{setTab(0)}}>버튼0</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="link1" onClick={()=>{setTab(1)}}>버튼1</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="link2" onClick={()=>{setTab(2)}}>버튼2</Nav.Link>
+        </Nav.Item>
+      </Nav>
+      <TabComponent tab={tab} />
     </div> 
   );
 }
+
+function TabComponent({tab}) {
+  return [<div>내용 0</div>, <div>내용 1</div>, <div>내용 2</div> ][tab];
+}
+
 
 const Btn = styled.div`
   background-color: ${ (props) => props.bg};
