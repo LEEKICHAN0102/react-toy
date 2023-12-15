@@ -10,6 +10,7 @@ export default function Detail(props) {
   const [isNumber, setIsNumber] = useState(false);
   const [inputVal , setInputVal] = useState("");
   const [tab, setTab] = useState(0);
+  const [fade, setFade] = useState("");
 
   useEffect(()=>{
     const timer = setTimeout(()=> {setIsGone(false)}, 2000);
@@ -17,14 +18,15 @@ export default function Detail(props) {
     if(isRealNum){
       setIsNumber(true);
     }
+    setTimeout(()=>{setFade("end")},100);
 
     return () => {
       clearTimeout(timer);
     }
-  },[inputVal]);
+  },[inputVal, fade]);
 
   return (
-    <div className="container">
+    <div className={`container start ${fade}`}>
       <Btn bg="teal">버튼 입니당</Btn>
       {isGone ? <div className="isGone">2초 이내 구매시 할인!</div> : <div>2초 지남 ㅋㅋ</div>}
       {isNumber ?  null : <Warning bg="red">숫자만 입력해주세요;;</Warning>}
@@ -57,7 +59,20 @@ export default function Detail(props) {
 }
 
 function TabComponent({tab}) {
-  return [<div>내용 0</div>, <div>내용 1</div>, <div>내용 2</div> ][tab];
+  const [fade, setFade] = useState("");
+
+  useEffect(()=>{
+    setTimeout(()=>{setFade("end")},100);
+
+    return ()=>{
+      setFade("");
+    }
+  },[tab])
+
+  return (<div className={`start ${fade}`}>
+    {[<div>내용 0</div>, <div>내용 1</div>, <div>내용 2</div> ][tab]}
+  </div>)
+  
 }
 
 
