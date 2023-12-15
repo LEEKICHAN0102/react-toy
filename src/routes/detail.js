@@ -1,12 +1,9 @@
 import { Nav } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { useState , useEffect, useContext } from "react";
-import { Context1 } from "../App";
+import { useState , useEffect } from "react";
 
 export default function Detail({shoes}) {
-  let {sale} = useContext(Context1);
-  console.log({sale});
   let {id} = useParams();
 
   const [isGone, setIsGone] = useState(true);
