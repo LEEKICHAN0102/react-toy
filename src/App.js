@@ -1,13 +1,16 @@
 import './App.css';
 import {Navbar,Container,Nav} from 'react-bootstrap';
-import { useState } from 'react';
+import { createContext, useState } from 'react';
 import { Route,Routes, useNavigate, Outlet } from 'react-router-dom';
 import data from './db/data';
 import Detail from './routes/detail';
 import Product from './components/product';
 
+export let Context1 = createContext();
+
 function App() {
   const [shoes] = useState(data);
+  const [sale , setSales] = useState([10,11,12]);
   const navigate = useNavigate();
 
   return (
@@ -27,7 +30,11 @@ function App() {
       <Container>
         <Routes>
           <Route path='/' element={< Product shoes={shoes} />}/>
-          <Route path='/detail/:id' element={<Detail shoes={shoes} />}/>
+          <Route path='/detail/:id' element={
+            <Context1.Provider value={{ sale, shoes}}>
+              <Detail shoes={shoes} />
+            </Context1.Provider>
+          }/>
           <Route path='*' element={<div>404</div>}/>
           <Route path='/about' element={<About/>}>
             <Route path='member' element={<div>Member</div>}/>

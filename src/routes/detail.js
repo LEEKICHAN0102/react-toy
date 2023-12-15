@@ -1,9 +1,12 @@
 import { Nav } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { useState , useEffect } from "react";
+import { useState , useEffect, useContext } from "react";
+import { Context1 } from "../App";
 
-export default function Detail(props) {
+export default function Detail({shoes}) {
+  let {sale} = useContext(Context1);
+  console.log({sale});
   let {id} = useParams();
 
   const [isGone, setIsGone] = useState(true);
@@ -36,9 +39,9 @@ export default function Detail(props) {
           <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" alt='shoes' />
         </div>
         <div className="col-md-6">
-          <h4 className="pt-5">{props.shoes[id].title}</h4>
-          <p>{props.shoes[id].content}</p>
-          <p>{props.shoes[id].price}</p>
+          <h4 className="pt-5">{shoes[id].title}</h4>
+          <p>{shoes[id].content}</p>
+          <p>{shoes[id].price}</p>
           <button className="btn btn-danger">주문하기</button> 
         </div>
       </div>
