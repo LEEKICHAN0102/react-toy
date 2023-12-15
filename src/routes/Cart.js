@@ -1,16 +1,20 @@
 import { Table } from "react-bootstrap"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { changeName, returnName, addCount, minusCount } from "../store";
 
 export default function Cart() {
 
   let state = useSelector((state) => {
-    return state.storeInfo
+    return state
   });
+
+  let dispatch = useDispatch()
 
   console.log(state);
   
   return (
     <div>
+        {state.user}의 바구니
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -21,12 +25,23 @@ export default function Cart() {
           </tr>
         </thead>
         <tbody>
-          {state.map((item) => (
-            <tr key={item.id}>
-              <td>{item.id}</td>
-              <td>{item.name}</td>
-              <td>{item.count}</td>
-              <td></td>
+          {state.storeInfo.map((a,i) => (
+            <tr key={i}>
+              <td>{state.storeInfo[i].id}</td>
+              <td>{state.storeInfo[i].name}</td>
+              <td>{state.storeInfo[i].count}</td>
+              <td onClick={()=>{
+                  dispatch(changeName());
+                  dispatch(addCount());
+                }}>
+                +
+              </td>
+              <td onClick={()=>{
+                  dispatch(returnName());
+                  dispatch(minusCount());
+                }}>
+                -
+              </td>
             </tr>
           ))}
         </tbody>
