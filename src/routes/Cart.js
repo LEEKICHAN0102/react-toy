@@ -1,7 +1,7 @@
 import { Table } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { changeAge } from "../store/userSlice";
-import { addQuantity } from "../store/productSlice";
+import { addQuantity, deleteQuantity } from "../store/productSlice";
 
 export default function Cart() {
 
@@ -11,8 +11,6 @@ export default function Cart() {
 
   let dispatch = useDispatch()
 
-  console.log(state);
-  
   return (
     <div>
         {state.user.name}의 바구니 {state.user.age}
@@ -35,13 +33,14 @@ export default function Cart() {
               <td>{state.storeInfo[i].name}</td>
               <td>{state.storeInfo[i].count}</td>
               <td onClick={()=>{
-                  dispatch(addQuantity(i))
+                  dispatch(addQuantity(state.storeInfo[i].id))
                 }}>
                 +
               </td>
               <td onClick={()=>{
+                  dispatch(deleteQuantity(state.storeInfo[i].id))
                 }}>
-                -
+                상품 삭제
               </td>
             </tr>
           ))}

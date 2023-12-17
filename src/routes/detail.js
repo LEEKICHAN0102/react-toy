@@ -2,9 +2,13 @@ import { Nav } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useState , useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../store/productSlice";
 
 export default function Detail({shoes}) {
   let {id} = useParams();
+
+  let dispatch = useDispatch();
 
   const [isGone, setIsGone] = useState(true);
   const [isNumber, setIsNumber] = useState(false);
@@ -39,7 +43,9 @@ export default function Detail({shoes}) {
           <h4 className="pt-5">{shoes[id].title}</h4>
           <p>{shoes[id].content}</p>
           <p>{shoes[id].price}</p>
-          <button className="btn btn-danger">주문하기</button> 
+          <button className="btn btn-danger" onClick={()=>{
+            dispatch(addProduct({id , name : shoes[id].title , count : 1 }))
+          }}>주문하기</button> 
         </div>
       </div>
       <Nav variant="tabs"  defaultActiveKey="link0">

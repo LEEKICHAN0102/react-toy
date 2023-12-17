@@ -1,7 +1,7 @@
 import './App.css';
 import {Navbar,Container,Nav} from 'react-bootstrap';
 import { useState } from 'react';
-import { Route,Routes, useNavigate, Outlet } from 'react-router-dom';
+import { Route,Routes, useNavigate, Outlet, Link } from 'react-router-dom';
 import data from './db/data';
 import Detail from './routes/Detail';
 import Cart from './routes/Cart';
@@ -18,8 +18,15 @@ function App() {
           <Navbar.Brand href="#home">React-toy</Navbar.Brand>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/" onClick={()=>{navigate("/")}}>Home</Nav.Link>
-              <Nav.Link href="/detail" onClick={()=>{navigate("/detail")}}>Detail</Nav.Link>
+              <Link to="/" style={{textDecoration: "none"}}>
+                <Nav.Link href="/" onClick={()=>{navigate("/")}}>Home</Nav.Link>
+              </Link>
+              <Link to="/detail" style={{textDecoration: "none"}}>
+                <Nav.Link href="/detail" onClick={()=>{navigate("/detail")}}>Detail</Nav.Link>
+              </Link>
+              <Link to="/cart" style={{textDecoration: "none"}}>
+                <Nav.Link href="/cart" onClick={()=>{navigate("/cart")}}>Cart</Nav.Link>
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
