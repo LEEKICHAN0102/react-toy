@@ -7,7 +7,6 @@ import { addProduct } from "../store/productSlice";
 
 export default function Detail({shoes}) {
   let {id} = useParams();
-
   let dispatch = useDispatch();
 
   const [isGone, setIsGone] = useState(true);
@@ -15,7 +14,6 @@ export default function Detail({shoes}) {
   const [inputVal , setInputVal] = useState("");
   const [tab, setTab] = useState(0);
   const [fade, setFade] = useState("");
-
   useEffect(()=>{
     const timer = setTimeout(()=> {setIsGone(false)}, 2000);
     const isRealNum = /^[0-9]+$/.test(inputVal);

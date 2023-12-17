@@ -6,10 +6,18 @@ import data from './db/data';
 import Detail from './routes/Detail';
 import Cart from './routes/Cart';
 import Product from './components/product';
+import axios from 'axios';
+import { useQuery } from 'react-query';
 
 function App() {
   const [shoes] = useState(data);
   const navigate = useNavigate();
+
+  let userName = useQuery("작명", ()=>
+    axios.get('https://codingapple1.github.io/userdata.json').then((name)=> {
+      return name.data
+    })
+  )
 
   return (
     <div className="App">
@@ -31,7 +39,7 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div className="main-bg"></div>
+      <div className="main-bg">반갑다~{userName.isLoading ? "로딩중" : userName.data.name}야</div>
       <Container>
         <Routes>
           <Route path='/' element={< Product shoes={shoes} />}/>
